@@ -46,7 +46,7 @@ A high-performance enterprise FX Trading Workstation showcasing a **3-Micro-Fron
 - [ ] **`packages/rx-engine`**
   - [x] Configure `package.json` with package name `@fx-platform/rx-engine`.
   - [x] Implement Web Worker `fxWorker.ts` (JSON parser off-main-thread).
-  - [ ] Add local WebSocket server in`scripts/mock-ws-server.ts` and add new script `mock:ws` in package.json
+  - [x] Add local WebSocket server in`scripts/mock-ws-server.ts` and add new script `mock:ws` in package.json
   - [ ] Implement the bridge that connects Worker messages to React components: `FXStreamService.ts` (Master RxJS `Subject` + `sampleTime(16)` backpressure).
   - [ ] Implement Event Bus for cross-MFE trade execution messages.
   - [ ] Export public API through `index.ts`.
