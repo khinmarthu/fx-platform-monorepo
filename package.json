@@ -11,7 +11,8 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
-    "mock:ws": "tsx scripts/mock-ws-server.ts"
+    "mock:ws": "tsx scripts/mock-ws-server.ts",
+    "test:rx": "tsx scripts/test-rx-engine.ts"
   },
   "workspaces": [
     "apps/*",
