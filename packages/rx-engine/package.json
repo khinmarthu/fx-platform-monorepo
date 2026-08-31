@@ -1,0 +1,25 @@
+{
+  "name": "@fx-platform/rx-engine",
+  "version": "1.0.0",
+  "keywords": [],
+  "author": "Khin Mar Thu",
+  "license": "ISC",
+  "description": "",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "rxjs": "^7.8.2"
+  },
+  "devDependencies": {
+    "@types/node": "^26.4.0",
+    "typescript": "^7.0.2"
+  }
+}
