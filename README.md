@@ -134,7 +134,10 @@ pnpm lint
   - Web Worker off-thread WebSocket parser (`fxWorker.ts`).
   - Throttled `FXStreamService` (`sampleTime(16)`).
   - Cross-MFE `EventBus`.
-- [ ] **Phase 2: Shared Store (`packages/store`)**
-  - Redux `createEntityAdapter` setup and common TS types.
+- [x] **Phase 2: Shared Store (`packages/store`)**
+  - Shared domain interfaces (`types.ts`).
+  - Redux `createEntityAdapter<TradeOrder, string>` normalized state (`tradeSlice.ts`) setup.
+- [ ] **Phase 2: Shared UI Components (packages/ui-components)**
+  - Reusable React design system components & Tailwind setup.
 - [ ] **Phase 3: Micro-Frontend Apps (`apps/`)**
   - `pricing-mfe`, `blotter-mfe`, and `shell-app` integration.
