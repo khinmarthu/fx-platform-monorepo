@@ -51,15 +51,14 @@ A high-performance enterprise FX Trading Workstation showcasing a **3-Micro-Fron
   - [x] Implement Event Bus for cross-MFE trade execution messages.
   - [x] Add test script `scripts/test-rx-engine.ts` and add new script `test:rx` in package.json to test rx-engine
   - [x] Export public API through `index.ts`.
-- [ ] **`packages/store`**
+- [x] **`packages/store`**
   - [x] Configure `package.json` with package name `@fx-platform/store` and `tsconfig.json`.
   - [x] Define shared TypeScript interfaces (`types.ts`: `TickData`, `TradeOrder`, `TradeStatus`).
   - [x] Implement normalized `tradeSlice.ts` using `createEntityAdapter<TradeOrder, string>`
   - [x] Export slice actions, entity selectors, and named `tradeReducer` (`index.ts`)
-- [ ] **`packages/ui-components`**
-  - [ ] Configure `package.json` with package name `@fx-platform/ui-components`.
-  - [ ] Set up Tailwind CSS / shared component library
-  - [ ] Implement reusable Pricing Tile, Button, and Table components
+- [x] **`packages/ui-components`**
+  - [x] Configure `package.json` with package name `@fx-platform/ui-components`.
+  - [x] Implement reusable TradeButton and StatusBadge components
 
 ### Phase 3: Application Development (`apps/`)
 - [ ] **`apps/pricing-mfe` (Live Pricing)**

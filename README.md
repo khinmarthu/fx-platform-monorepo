@@ -137,7 +137,8 @@ pnpm lint
 - [x] **Phase 2: Shared Store (`packages/store`)**
   - Shared domain interfaces (`types.ts`).
   - Redux `createEntityAdapter<TradeOrder, string>` normalized state (`tradeSlice.ts`) setup.
-- [ ] **Phase 2: Shared UI Components (packages/ui-components)**
-  - Reusable React design system components & Tailwind setup.
+- [x] **Phase 2: Shared UI Components (packages/ui-components)**
+  - Reusable React design system components (TradeButton, StatusBadge).
+  - Configured peerDependencies contract to prevent multiple React instances.
 - [ ] **Phase 3: Micro-Frontend Apps (`apps/`)**
   - `pricing-mfe`, `blotter-mfe`, and `shell-app` integration.
