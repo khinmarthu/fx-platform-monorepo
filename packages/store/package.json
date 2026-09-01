@@ -1,0 +1,25 @@
+{
+  "name": "@fx-platform/store",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "Khin Mar Thu",
+  "license": "ISC",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.12.0",
+    "react-redux": "^9.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.4.0",
+    "typescript": "^7.0.2"
+  }
+}

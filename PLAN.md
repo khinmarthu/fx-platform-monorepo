@@ -52,7 +52,7 @@ A high-performance enterprise FX Trading Workstation showcasing a **3-Micro-Fron
   - [x] Add test script `scripts/test-rx-engine.ts` and add new script `test:rx` in package.json to test rx-engine
   - [x] Export public API through `index.ts`.
 - [ ] **`packages/store`**
-  - [ ] Configure `package.json` with package name `@fx-platform/store`.
+  - [x] Configure `package.json` with package name `@fx-platform/store`.
   - [ ] Define shared TypeScript interfaces (`TickData`, `TradeOrder`, `ExecutionEvent`).
   - [ ] Export Redux Toolkit `createEntityAdapter` configuration helpers.
 - [ ] **`packages/ui-components`**
