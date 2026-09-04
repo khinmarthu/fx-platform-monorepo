@@ -51,21 +51,24 @@ A high-performance enterprise FX Trading Workstation showcasing a **3-Micro-Fron
   - [x] Implement Event Bus for cross-MFE trade execution messages.
   - [x] Add test script `scripts/test-rx-engine.ts` and add new script `test:rx` in package.json to test rx-engine
   - [x] Export public API through `index.ts`.
+  - [x] Re-export key RxJS utilities to enforce zero direct `rxjs` dependency in MFEs
 - [x] **`packages/store`**
   - [x] Configure `package.json` with package name `@fx-platform/store` and `tsconfig.json`.
   - [x] Define shared TypeScript interfaces (`types.ts`: `TickData`, `TradeOrder`, `TradeStatus`).
   - [x] Implement normalized `tradeSlice.ts` using `createEntityAdapter<TradeOrder, string>`
   - [x] Export slice actions, entity selectors, and named `tradeReducer` (`index.ts`)
 - [x] **`packages/ui-components`**
-  - [x] Configure `package.json` with package name `@fx-platform/ui-components`.
-  - [x] Implement reusable TradeButton and StatusBadge components
+  - [x] Configure `package.json` with React `peerDependencies` contract
+  - [x] Implement hybrid `TradeButton` (`forwardRef` for direct DOM mutations & optional prop fallback)
+  - [x] Implement `StatusBadge` component
+  - [x] Export public entrypoints (`index.ts`) and compile TypeScript dist
 
 ### Phase 3: Application Development (`apps/`)
-- [ ] **`apps/pricing-mfe` (Live Pricing)**
-  - [ ] Wire dependency `@fx-platform/rx-engine`.
-  - [ ] Build custom `useFXStream` hook with auto-unsubscribe via `takeUntil`.
-  - [ ] Build high-frequency `<PriceTile />` components (Direct RxJS-to-DOM).
-  - [ ] Implement "Execute Trade" button emitting events onto the RxJS Event Bus.
+- [x] **`apps/pricing-mfe`**: (Live rate grid micro-subscribing to `FXStreamService`)
+  - [x] Implement custom `useDirectFXStream` hook with auto-unsubscribe via `takeUntil` for zero-VDOM direct DOM updates
+  - [x] Implement high-frequency `<PricingTile />`components (Direct RxJS-to-DOM) using hybrid `TradeButton` with ref forwarding
+  - [x] Integrate trade execution emitting events onto cross-MFE `EventBus`
+  
 - [ ] **`apps/blotter-mfe` (Trade History)**
   - [ ] Wire dependencies `@fx-platform/rx-engine` and `@fx-platform/store`.
   - [ ] Set up local Redux Toolkit store using `createEntityAdapter`.

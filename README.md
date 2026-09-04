@@ -133,12 +133,19 @@ pnpm lint
 - [x] **Phase 2: RxJS Stream Engine (`packages/rx-engine`)**
   - Web Worker off-thread WebSocket parser (`fxWorker.ts`).
   - Throttled `FXStreamService` (`sampleTime(16)`).
-  - Cross-MFE `EventBus`.
+  - Cross-MFE `EventBus` and RxJS utility re-exports.
 - [x] **Phase 2: Shared Store (`packages/store`)**
   - Shared domain interfaces (`types.ts`).
   - Redux `createEntityAdapter<TradeOrder, string>` normalized state (`tradeSlice.ts`) setup.
 - [x] **Phase 2: Shared UI Components (packages/ui-components)**
-  - Reusable React design system components (TradeButton, StatusBadge).
+  - Hybrid TradeButton with forwardRef direct DOM support and prop fallbacks.
+  - StatusBadge design component.
   - Configured peerDependencies contract to prevent multiple React instances.
-- [ ] **Phase 3: Micro-Frontend Apps (`apps/`)**
-  - `pricing-mfe`, `blotter-mfe`, and `shell-app` integration.
+- [x] **Phase 3: Live Pricing MFE (apps/pricing-mfe)**
+  - Headless useDirectFXStream hook with auto-unsubscription.
+  - Micro-subscribing rate grid bypassing VDOM reconciliation via ref forwarding.
+  - Order execution event publishing on EventBus.
+- [ ] **Phase 3: Trade Blotter MFE (apps/blotter-mfe)**
+  - Subscribing to trade execution events and storing in normalized Redux store.
+- [ ] **Phase 3: Host Shell App (apps/shell-app)**
+  - Main workstation layout mounting pricing-mfe and blotter-mfe.
