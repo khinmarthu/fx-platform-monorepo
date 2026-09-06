@@ -71,6 +71,7 @@ fx-platform-monorepo/
 ## Prerequisites & Installation
 
 ### Requirements
+
 - **Node.js**: `^20.0.0` or higher
 - **pnpm**: `11.24.0` (managed via `packageManager` field)
 
@@ -92,6 +93,7 @@ pnpm install
 ### 1. Running Local Utilities (`scripts/`)
 
 #### Step A: Start the Mock WebSocket Server
+
 Runs a local WebSocket server at `ws://localhost:8080` streaming 100 ticks/sec across major FX pairs (`EUR/USD`, `GBP/USD`, `USD/JPY`, `AUD/USD`).
 
 ```bash
@@ -99,6 +101,7 @@ pnpm mock:ws
 ```
 
 #### Step B: Run the Stream Engine Integration Test
+
 In a separate terminal window (while `pnpm mock:ws` is running), test the `@fx-platform/rx-engine` pipeline directly in your terminal to verify worker communication, backpressure throttling, and symbol filtering:
 
 ```bash

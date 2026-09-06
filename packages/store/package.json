@@ -19,7 +19,6 @@
     "react-redux": "^9.3.0"
   },
   "devDependencies": {
-    "@types/node": "^26.4.0",
-    "typescript": "^7.0.2"
+    "@types/node": "^26.4.0"
   }
 }

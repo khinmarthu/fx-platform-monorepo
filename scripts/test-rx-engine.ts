@@ -6,7 +6,7 @@ if (typeof globalThis.Worker === 'undefined') {
 
 // import { FXStreamService } from '../packages/rx-engine/src/FXStreamService.js';
 
-// need to run build first below 
+// need to run build first below
 // cd packages/rx-engine && pnpm build && cd ../..
 import { FXStreamService } from '../packages/rx-engine/dist/FXStreamService.js';
 

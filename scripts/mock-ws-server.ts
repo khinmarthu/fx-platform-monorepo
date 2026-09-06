@@ -13,10 +13,10 @@ interface RawTick {
 }
 
 const SYMBOLS: Record<string, { base: number; spread: number }> = {
-  'EUR/USD': { base: 1.0850, spread: 0.0002 },
-  'GBP/USD': { base: 1.2640, spread: 0.0003 },
-  'USD/JPY': { base: 155.20, spread: 0.0200 },
-  'AUD/USD': { base: 0.6530, spread: 0.0002 },
+  'EUR/USD': { base: 1.085, spread: 0.0002 },
+  'GBP/USD': { base: 1.264, spread: 0.0003 },
+  'USD/JPY': { base: 155.2, spread: 0.02 },
+  'AUD/USD': { base: 0.653, spread: 0.0002 },
 };
 
 function generateTick(symbol: string): RawTick {

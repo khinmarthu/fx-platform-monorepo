@@ -5,6 +5,7 @@ A high-performance enterprise FX Trading Workstation showcasing a **3-Micro-Fron
 ---
 
 ## Architecture Blueprint
+
     ┌─────────────────────────────────────────────────────────────────────────────┐
     │ 1. SHELL MFE (`apps/shell-app`)                                             │
     │    - Navigation Header, Layout Grid, Auth Token Context, Theme Switching    │
@@ -30,12 +31,12 @@ A high-performance enterprise FX Trading Workstation showcasing a **3-Micro-Fron
                                     │  (`rx-engine`)   │
                                     └──────────────────┘
 
-
 ---
 
 ## Master TODO List
 
 ### Phase 1: Workspace Scaffolding & Root Configuration
+
 - [x] Initialize `fx-platform-monorepo` root directory.
 - [x] Create `pnpm-workspace.yaml` declaring `apps/*` and `packages/*`.
 - [x] Create `turbo.json` defining build pipeline (`build`, `dev`, `lint`).
@@ -43,6 +44,7 @@ A high-performance enterprise FX Trading Workstation showcasing a **3-Micro-Fron
 - [x] Create `tsconfig.base.json` for shared TypeScript configurations.
 
 ### Phase 2: Shared Workspace Packages (`packages/`)
+
 - [ ] **`packages/rx-engine`**
   - [x] Configure `package.json` with package name `@fx-platform/rx-engine`.
   - [x] Implement Web Worker `fxWorker.ts` (JSON parser off-main-thread).
@@ -64,11 +66,12 @@ A high-performance enterprise FX Trading Workstation showcasing a **3-Micro-Fron
   - [x] Export public entrypoints (`index.ts`) and compile TypeScript dist
 
 ### Phase 3: Application Development (`apps/`)
+
 - [x] **`apps/pricing-mfe`**: (Live rate grid micro-subscribing to `FXStreamService`)
   - [x] Implement custom `useDirectFXStream` hook with auto-unsubscribe via `takeUntil` for zero-VDOM direct DOM updates
   - [x] Implement high-frequency `<PricingTile />`components (Direct RxJS-to-DOM) using hybrid `TradeButton` with ref forwarding
   - [x] Integrate trade execution emitting events onto cross-MFE `EventBus`
-  
+
 - [x] **`apps/blotter-mfe` (Trade History)**
   - [x] Wire dependencies `@fx-platform/rx-engine`, `@fx-platform/store`, and `@fx-platform/ui-components`.
   - [x] Set up local Redux store consuming `tradeReducer` from `@fx-platform/store`.
@@ -80,6 +83,7 @@ A high-performance enterprise FX Trading Workstation showcasing a **3-Micro-Fron
   - [ ] Render and layout `<PricingMFE />` and `<BlotterMFE />` in a split workstation view.
 
 ### Phase 4: Benchmarking, Documentation & Portfolio Readies
+
 - [ ] Verify 60fps performance without main thread blocking.
 - [ ] Verify zero memory leaks on component unmounting.
 - [ ] Create GitHub `README.md` with architecture diagrams and performance benchmarks.
