@@ -6,21 +6,23 @@ export default defineConfig({
     plugins: [
         react(),
         federation({
-            name: 'pricing_mfe',
+            name: 'blotter_mfe',
             filename: 'remoteEntry.js',
             exposes: {
-                './PricingApp': './src/App.tsx',
+                './BlotterApp': './src/App.tsx',
             },
             shared: {
                 react: { singleton: true, requiredVersion: '^19.2.8' },
                 'react-dom': { singleton: true, requiredVersion: '^19.2.8' },
+                'react-redux': { singleton: true, requiredVersion: '^9.3.0' },
                 '@fx-platform/rx-engine': { singleton: true },
+                '@fx-platform/store': { singleton: true },
                 '@fx-platform/ui-components': { singleton: true },
             },
         }),
     ],
     server: {
-        port: 3001,
+        port: 3002,
         // Crucial for development: ensures the host app can cross-origin fetch assets from this port
         cors: true,
     },
