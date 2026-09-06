@@ -1,30 +1,53 @@
-import { WebSocketServer } from 'ws';
+import { WebSocketServer, WebSocket } from 'ws';
 
-const wss = new WebSocketServer({ port: 8080 });
+const PORT = 8080;
+const wss = new WebSocketServer({ port: PORT });
 
-console.log('[Mock WS Server] Running on ws://localhost:8080');
+console.log(`[Mock WS Server] Running on ws://localhost:${PORT}`);
 
-// mock web socket server
-wss.on('connection', (ws) => {
-    console.log('Client connected to FX Tick Stream');
+interface RawTick {
+  symbol: string;
+  bid: number;
+  ask: number;
+  timestamp: number;
+}
 
-    const interval = setInterval(() => {
+const SYMBOLS: Record<string, { base: number; spread: number }> = {
+  'EUR/USD': { base: 1.0850, spread: 0.0002 },
+  'GBP/USD': { base: 1.2640, spread: 0.0003 },
+  'USD/JPY': { base: 155.20, spread: 0.0200 },
+  'AUD/USD': { base: 0.6530, spread: 0.0002 },
+};
 
-        const tick = {
-            symbol: 'EUR/USD',
-            bid: +(1.0850 + (Math.random() - 0.5) * 0.001).toFixed(5),
-            ask: +(1.0852 + (Math.random() - 0.5) * 0.001).toFixed(5),
-            timestamp: Date.now(),
-        };
-        // console.log('tick:', tick);
+function generateTick(symbol: string): RawTick {
+  const config = SYMBOLS[symbol];
+  const delta = (Math.random() - 0.498) * 0.001 * config.base;
+  const newBid = parseFloat((config.base + delta).toFixed(symbol.includes('JPY') ? 3 : 5));
+  config.base = newBid;
 
-        ws.send(JSON.stringify(tick));
+  return {
+    symbol,
+    bid: newBid,
+    ask: parseFloat((newBid + config.spread).toFixed(symbol.includes('JPY') ? 3 : 5)),
+    timestamp: Date.now(),
+  };
+}
 
-        ws.on('message', (wsEvent) => {
-            console.log('Web socket server received: ');
-        })
-    }, 10); // 1000 / 10 = 100 ticks/sec throughput stream
+wss.on('connection', (ws: WebSocket) => {
+  console.log('[Mock WS Server] Client connected');
 
-    ws.on('close', () => clearInterval(interval));
+  // Stream high-frequency ticks every 10ms (100 ticks/second)
+  const keys = Object.keys(SYMBOLS);
+  const intervalId = setInterval(() => {
+    if (ws.readyState === WebSocket.OPEN) {
+      const randomSymbol = keys[Math.floor(Math.random() * keys.length)];
+      const tick = generateTick(randomSymbol);
+      ws.send(JSON.stringify(tick));
+    }
+  }, 10);
+
+  ws.on('close', () => {
+    console.log('[Mock WS Server] Client disconnected');
+    clearInterval(intervalId);
+  });
 });
-
