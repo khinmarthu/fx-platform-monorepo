@@ -69,11 +69,12 @@ A high-performance enterprise FX Trading Workstation showcasing a **3-Micro-Fron
   - [x] Implement high-frequency `<PricingTile />`components (Direct RxJS-to-DOM) using hybrid `TradeButton` with ref forwarding
   - [x] Integrate trade execution emitting events onto cross-MFE `EventBus`
   
-- [ ] **`apps/blotter-mfe` (Trade History)**
-  - [ ] Wire dependencies `@fx-platform/rx-engine` and `@fx-platform/store`.
-  - [ ] Set up local Redux Toolkit store using `createEntityAdapter`.
-  - [ ] Implement Master Stream subscription listening to `ORDER_EXECUTED` events.
-  - [ ] Build `<OrderBlotterTable />` with $O(1)$ row updates via `selectOrderById`.
+- [x] **`apps/blotter-mfe` (Trade History)**
+  - [x] Wire dependencies `@fx-platform/rx-engine`, `@fx-platform/store`, and `@fx-platform/ui-components`.
+  - [x] Set up local Redux store consuming `tradeReducer` from `@fx-platform/store`.
+  - [x] Implement `EventBus` subscription listening to `ORDER_EXECUTED` trade events via `eventBus.onEvent()`.
+  - [x] Build `<BlotterTable />` rendering trade executions from Redux state using `selectAllBlotterTrades`.
+
 - [ ] **`apps/shell-app` (Shell MFE)**
   - [ ] Build workspace layout frame, top navigation bar, and user status header.
   - [ ] Render and layout `<PricingMFE />` and `<BlotterMFE />` in a split workstation view.

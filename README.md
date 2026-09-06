@@ -145,7 +145,10 @@ pnpm lint
   - Headless useDirectFXStream hook with auto-unsubscription.
   - Micro-subscribing rate grid bypassing VDOM reconciliation via ref forwarding.
   - Order execution event publishing on EventBus.
-- [ ] **Phase 3: Trade Blotter MFE (apps/blotter-mfe)**
-  - Subscribing to trade execution events and storing in normalized Redux store.
+- [x] **Phase 3: Trade Blotter MFE (`apps/blotter-mfe`)**
+  - **Module Federation 2.0 Integration:** Configured `@module-federation/vite` exposing `./BlotterApp` and declaring singletons for `react`, `react-dom`, `react-redux`, `@fx-platform/rx-engine`, `@fx-platform/store`, and `@fx-platform/ui-components`.
+  - **Local Redux State Management:** Integrated `tradeReducer` from `@fx-platform/store` into a local Redux Toolkit store instance to manage trade entity state.
+  - **Cross-MFE Messaging:** Implemented `eventBus.onEvent()` subscription listening for `ORDER_EXECUTED` events published from `pricing-mfe`.
+  - **UI Implementation:** Built `<BlotterTable />` to render executed trades with real-time updates and status badges.
 - [ ] **Phase 3: Host Shell App (apps/shell-app)**
   - Main workstation layout mounting pricing-mfe and blotter-mfe.
