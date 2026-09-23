@@ -30,19 +30,19 @@ export const BlotterTable: FC = () => {
   return (
     <div
       style={{
-        backgroundColor: '#ffffff',
+        backgroundColor: 'var(--color-surface)',
         borderRadius: '8px',
-        border: '1px solid #e2e8f0',
+        border: '1px solid var(--color-border)',
         padding: '16px',
       }}
     >
       <h3 style={{ marginTop: 0 }}>Trade Execution Blotter</h3>
       {allTrades.length === 0 ? (
-        <p style={{ color: '#64748b' }}>No trades executed yet. Place an order from Pricing MFE.</p>
+        <p style={{ color: 'var(--color-text-muted)' }}>No trades executed yet. Place an order from Pricing MFE.</p>
       ) : (
         <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
           <thead>
-            <tr style={{ borderBottom: '2px solid #e2e8f0' }}>
+            <tr style={{ borderBottom: '2px solid var(--color-border)' }}>
               <th style={{ padding: '8px' }}>Order ID</th>
               <th style={{ padding: '8px' }}>Symbol</th>
               <th style={{ padding: '8px' }}>Side</th>
@@ -53,20 +53,20 @@ export const BlotterTable: FC = () => {
           </thead>
           <tbody>
             {allTrades.map((trade) => (
-              <tr key={trade.orderId} style={{ borderBottom: '1px solid #f1f5f9' }}>
-                <td style={{ padding: '8px', fontFamily: 'monospace' }}>{trade.orderId}</td>
+              <tr key={trade.orderId} style={{ borderBottom: '1px solid var(--color-border-subtle)' }}>
+                <td style={{ padding: '8px', fontFamily: 'var(--font-family-mono)' }}>{trade.orderId}</td>
                 <td style={{ padding: '8px', fontWeight: 'bold' }}>{trade.symbol}</td>
                 <td
                   style={{
                     padding: '8px',
-                    color: trade.side === 'BUY' ? '#16a34a' : '#dc2626',
+                    color: trade.side === 'BUY' ? 'var(--color-buy)' : 'var(--color-sell)',
                     fontWeight: 'bold',
                   }}
                 >
                   {trade.side}
                 </td>
                 <td style={{ padding: '8px' }}>{trade.amount.toLocaleString()}</td>
-                <td style={{ padding: '8px', fontFamily: 'monospace' }}>
+                <td style={{ padding: '8px', fontFamily: 'var(--font-family-mono)' }}>
                   {trade.executedPrice.toFixed(5)}
                 </td>
                 <td style={{ padding: '8px' }}>

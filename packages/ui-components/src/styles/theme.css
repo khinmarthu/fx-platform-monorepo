@@ -1,0 +1,37 @@
+:root {
+  /* Typography */
+  --font-family-base: sans-serif, Arial, Helvetica;
+  --font-family-mono: 'SF Mono', 'Cascadia Code', Consolas, monospace;
+
+  /* Actions */
+  --color-buy: #16a34a;
+  --color-sell: #dc2626;
+  --color-text-inverse: #ffffff;
+
+  /* Surfaces */
+  --color-surface: #ffffff;
+  --color-border: #e2e8f0;
+  --color-border-subtle: #f1f5f9;
+  --color-text-muted: #64748b;
+
+  /* App shell */
+  --color-bg-app: #0f172a;
+  --color-text-app: #f8fafc;
+
+  /* Status badge */
+  --status-completed-bg: #dcfce7;
+  --status-completed-text: #15803d;
+  --status-pending-bg: #fef9c3;
+  --status-pending-text: #a16207;
+  --status-rejected-bg: #fee2e2;
+  --status-rejected-text: #b91c1c;
+}
+
+html,
+body,
+button,
+input,
+textarea,
+select {
+  font-family: var(--font-family-base);
+}

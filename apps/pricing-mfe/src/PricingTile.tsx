@@ -32,11 +32,11 @@ export const PricingTile: FC<IProps> = memo(({ symbol }) => {
   return (
     <div
       style={{
-        border: '1px solid #e2e8f0',
+        border: '1px solid var(--color-border)',
         borderRadius: '8px',
         padding: '16px',
         width: '280px',
-        backgroundColor: '#ffffff',
+        backgroundColor: 'var(--color-surface)',
       }}
     >
       <h3 style={{ margin: '0 0 12px 0', fontSize: '18px' }}>{symbol}</h3>
