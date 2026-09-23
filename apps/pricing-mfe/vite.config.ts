@@ -3,6 +3,8 @@ import react from '@vitejs/plugin-react';
 import { federation } from '@module-federation/vite';
 
 export default defineConfig({
+  // Root .env lives two levels up from this app
+  envDir: '../../',
   plugins: [
     react(),
     federation({
@@ -24,9 +26,14 @@ export default defineConfig({
     // Crucial for development: ensures the host app can cross-origin fetch assets from this port
     cors: true,
   },
+  preview: {
+    port: 3001, // 3001 for pricing-mfe
+    cors: true, // Enables CORS headers during `pnpm preview`
+    strictPort: true,
+  },
   build: {
     // Required for Module Federation 2.0 to support top-level await initialization
-    target: 'esnext',
+    target: 'es2022',
     // Optional but recommended for MFEs: ensures preloaded module strategies do not clash
     modulePreload: false,
   },
