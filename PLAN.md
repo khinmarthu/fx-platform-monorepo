@@ -1,6 +1,6 @@
 # FX Trading Platform Monorepo Architecture & Implementation Plan
 
-A high-performance enterprise FX Trading Workstation showcasing a **3-Micro-Frontend (MFE)** architecture built with **pnpm Workspaces**, **Turborepo**, **RxJS backpressure streaming**, and **Redux Toolkit normalized state**.
+A high-performance enterprise FX Trading showcasing a **3-Micro-Frontend (MFE)** architecture built with **pnpm Workspaces**, **Turborepo**, **RxJS backpressure streaming**, and **Redux Toolkit normalized state**.
 
 ---
 
@@ -78,12 +78,19 @@ A high-performance enterprise FX Trading Workstation showcasing a **3-Micro-Fron
   - [x] Implement `EventBus` subscription listening to `ORDER_EXECUTED` trade events via `eventBus.onEvent()`.
   - [x] Build `<BlotterTable />` rendering trade executions from Redux state using `selectAllBlotterTrades`.
 
-- [ ] **`apps/shell-app` (Shell MFE)**
-  - [ ] Build workspace layout frame, top navigation bar, and user status header.
-  - [ ] Render and layout `<PricingMFE />` and `<BlotterMFE />` in a split workstation view.
+- [x] **`apps/shell-app` (Shell MFE)**
+  - [x] Initialize `apps/shell-app` host container on Port 3000 with `@module-federation/vite`.
+  - [x] Configure remote entry orchestration (`pricing_mfe` and `blotter_mfe`).
+  - [x] Implement async module unwrap helper in `React.lazy` to resolve Module Federation dynamic bundles.
+  - [x] Establish hybrid type safety strategy using ambient declarations (`remotes.d.ts`) alongside `@mf-types`.
+  - [x] Verify end-to-end local FX trading rendering and cross-MFE component composition.
 
-### Phase 4: Benchmarking, Documentation & Portfolio Readies
+### Phase 4: Documentation & Production Build
+- [x] Document architecture and setup instructions.
+- [x] Verify full workspace `pnpm build` and local `pnpm preview` execution across all 3 apps.
+- [ ] Finalize CI/CD pipeline and containerized deployment strategy.
 
+### Phase 5: Benchmarking, Documentation & Portfolio Readies
 - [ ] Verify 60fps performance without main thread blocking.
 - [ ] Verify zero memory leaks on component unmounting.
 - [ ] Create GitHub `README.md` with architecture diagrams and performance benchmarks.

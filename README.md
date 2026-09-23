@@ -1,6 +1,29 @@
 # FX Trading Platform Monorepo
 
-A high-performance enterprise FX Trading Workstation showcasing a **3-Micro-Frontend (MFE)** architecture built with **pnpm Workspaces**, **Turborepo**, **RxJS backpressure streaming**, and **Redux Toolkit normalized state**.
+A high-performance enterprise FX Trading showcasing a **3-Micro-Frontend (MFE)** architecture built with **pnpm Workspaces**, **Turborepo**, **RxJS backpressure streaming**, and **Redux Toolkit normalized state**.
+
+---
+
+## Architecture Overview
+
+```
+                        ┌────────────────────────┐
+                        │       Shell App        │
+                        │     (Host - 3000)      │
+                        └───────────┬────────────┘
+                                    │
+            ┌───────────────────────┴───────────────────────┐
+            ▼                                               ▼
+┌───────────────────────┐                       ┌───────────────────────┐
+│      Pricing MFE      │                       │      Blotter MFE      │
+│    (Remote - 3001)    │                       │    (Remote - 3002)    │
+└───────────────────────┘                       └───────────────────────┘
+```
+
+- **`apps/shell-app` (Port 3000):** Host container orchestrating remote micro-frontends and dynamic route resolution.
+- **`apps/pricing-mfe` (Port 3001):** High-frequency streaming price grid powered by `@fx-platform/rx-engine` running off-main-thread Web Workers.
+- **`apps/blotter-mfe` (Port 3002):** Trade execution blotter managing transaction logs via `@fx-platform/store`.
+- **`packages/`:** Shared workspace packages (`rx-engine`, `store`, `ui-components`).
 
 ---
 
@@ -114,18 +137,38 @@ pnpm test:rx
 
 ---
 
-### 2. Workspace Monorepo Commands
-
+### 2. Development Mode
+Start all micro-frontends and the host shell concurrently in development mode:
 ```bash
-# Start all micro-frontend apps in development mode via Turborepo
+# please ensure to start web socket first `pnpm mock:ws`
 pnpm dev
-
-# Build all applications and packages for production
-pnpm build
-
-# Run linting across all workspace packages
-pnpm lint
 ```
+
+This starts:
+- **Pricing MFE:** `http://localhost:3001`
+- **Blotter MFE:** `http://localhost:3002`
+- **Shell:** `http://localhost:3000`
+
+Open **`http://localhost:3000`** in your browser to interact with the FX Trading.
+
+---
+
+### 3. Production Build & Preview
+
+#### 1. Compile Monorepo
+Build all packages and applications for production:
+```bash
+# please ensure to start web socket first `pnpm mock:ws`
+pnpm build
+```
+
+#### 2. Preview Production Bundles
+Serve the minified production outputs with CORS and Module Federation support enabled:
+```bash
+pnpm --parallel --filter "./apps/*" preview
+```
+
+Open **`http://localhost:3000`** to test production bundle execution.
 
 ---
 
@@ -153,5 +196,5 @@ pnpm lint
   - **Local Redux State Management:** Integrated `tradeReducer` from `@fx-platform/store` into a local Redux Toolkit store instance to manage trade entity state.
   - **Cross-MFE Messaging:** Implemented `eventBus.onEvent()` subscription listening for `ORDER_EXECUTED` events published from `pricing-mfe`.
   - **UI Implementation:** Built `<BlotterTable />` to render executed trades with real-time updates and status badges.
-- [ ] **Phase 3: Host Shell App (apps/shell-app)**
-  - Main workstation layout mounting pricing-mfe and blotter-mfe.
+- [x] **Phase 3: Host Shell App (apps/shell-app)**
+  - Main shell layout mounting pricing-mfe and blotter-mfe.
