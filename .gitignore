@@ -5,3 +5,21 @@ dist/
 .env
 .DS_Store
 ACTION.md
+
+
+# Module Federation 2.0 Auto-Generated Types
+@mf-types/
+.mf/
+
+# Vite & Bundler artifacts
+.vite/
+*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# IDE & System
+.vscode/
+.idea/
