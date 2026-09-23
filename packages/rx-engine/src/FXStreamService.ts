@@ -25,10 +25,8 @@ export class FXStreamService {
     if (this.worker) return;
 
     this.worker = new Worker(
-      new URL(import.meta.url.endsWith('.ts') ? './fxWorker.ts' : './fxWorker.js', import.meta.url),
-      {
-        type: 'module',
-      }
+      new URL('./fxWorker.js', import.meta.url),
+      { type: 'module' }
     );
 
     this.worker.onmessage = (event: MessageEvent) => {
