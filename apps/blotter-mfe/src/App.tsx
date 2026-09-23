@@ -10,3 +10,5 @@ export const App: FC = () => {
     </Provider>
   );
 };
+
+export default App;
