@@ -1,16 +1,17 @@
 {
-  "name": "@fx-platform/blotter-mfe",
+  "name": "shell-app",
+  "private": true,
   "version": "1.0.0",
   "description": "",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 3000",
+    "build": "tsc && vite build",
+    "preview": "vite preview --port 3000"
+  },
   "keywords": [],
   "author": "Khin Mar Thu",
   "license": "ISC",
-  "type": "module",
-  "scripts": {
-    "dev": "vite --port 3002",
-    "build": "tsc && vite build",
-    "preview": "vite preview --port 3002"
-  },
   "dependencies": {
     "@fx-platform/rx-engine": "workspace:*",
     "@fx-platform/store": "workspace:*",

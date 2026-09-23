@@ -1,0 +1,24 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "jsx": "react-jsx",
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "paths": {
+      "pricing_mfe/*": [
+        "./@mf-types/pricing_mfe/*"
+      ],
+      "blotter_mfe/*": [
+        "./@mf-types/blotter_mfe/*"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*"
+  ]
+}
