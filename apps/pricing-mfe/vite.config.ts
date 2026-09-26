@@ -2,9 +2,12 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { federation } from '@module-federation/vite';
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   // Root .env lives two levels up from this app
   envDir: '../../',
+  // Only prefix asset URLs under a subpath for production builds (served behind a
+  // path-based routing layer at /pricing/); `pnpm dev` keeps serving from root on :3001.
+  base: command === 'build' ? '/pricing/' : '/',
   plugins: [
     react(),
     federation({
@@ -37,4 +40,4 @@ export default defineConfig({
     // Optional but recommended for MFEs: ensures preloaded module strategies do not clash
     modulePreload: false,
   },
-});
+}));
