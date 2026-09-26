@@ -1,0 +1,42 @@
+# No explicit `networks:` block needed — Compose puts every service below on
+# one shared network automatically, with built-in DNS resolving each service
+# by its name (e.g. "pricing") to that container's internal IP. That's what
+# makes deploy/gateway/nginx.conf's `proxy_pass http://pricing` etc. resolve.
+services:
+  gateway:
+    build:
+      context: deploy/gateway
+    ports:
+      - '8080:80'
+    depends_on:
+      - shell
+      - pricing
+      - blotter
+      - mock-ws-server
+
+  shell:
+    build:
+      context: .
+      dockerfile: apps/shell-app/Dockerfile
+      args:
+        VITE_PRICING_MFE_URL: /pricing
+        VITE_BLOTTER_MFE_URL: /blotter
+
+  pricing:
+    build:
+      context: .
+      dockerfile: apps/pricing-mfe/Dockerfile
+      args:
+        # Relative URL — resolves against whatever origin the page was
+        # actually loaded from, with automatic ws/wss scheme selection.
+        VITE_WS_URL: /ws
+
+  blotter:
+    build:
+      context: .
+      dockerfile: apps/blotter-mfe/Dockerfile
+
+  mock-ws-server:
+    build:
+      context: .
+      dockerfile: deploy/mock-ws-server/Dockerfile
