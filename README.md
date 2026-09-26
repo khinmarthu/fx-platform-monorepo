@@ -172,6 +172,63 @@ Open **`http://localhost:3000`** to test production bundle execution.
 
 ---
 
+### 4. Docker (full stack via docker-compose)
+
+Five services, one shared network: `gateway` (nginx, the only one publishing
+a port) reverse-proxies `/` → `shell`, `/pricing/` → `pricing`, `/blotter/` →
+`blotter`, and `/ws` → `mock-ws-server`, matching a single-origin production
+topology instead of exposing each app on its own port.
+
+```bash
+docker compose up -d --build
+```
+
+Open **`http://localhost:8080`** — this is the one address everything is
+served from; the individual app containers publish no ports of their own.
+
+```bash
+docker compose down   # stop + remove containers and the network (images stay cached)
+```
+
+### 5. Docker (per-app image testing)
+
+Useful for investigating a build or runtime issue in one app in isolation,
+without the rest of the stack. Build context must be the repo root for all
+three (`turbo prune` needs to see the whole workspace), even though each
+Dockerfile lives inside its own app folder.
+
+**shell-app** (serves at `/`):
+```bash
+docker build -f apps/shell-app/Dockerfile \
+  --build-arg VITE_PRICING_MFE_URL=/pricing \
+  --build-arg VITE_BLOTTER_MFE_URL=/blotter \
+  -t fx-platform-shell-app:local .
+docker run -d --rm --name shell-test -p 8081:80 fx-platform-shell-app:local
+# check: curl http://localhost:8081/
+docker stop shell-test
+```
+
+**pricing-mfe** (serves at `/pricing/`):
+```bash
+docker build -f apps/pricing-mfe/Dockerfile \
+  --build-arg VITE_WS_URL=ws://localhost:8080 \
+  -t fx-platform-pricing-mfe:local .
+docker run -d --rm --name pricing-test -p 8082:80 fx-platform-pricing-mfe:local
+# check: curl http://localhost:8082/pricing/
+docker stop pricing-test
+```
+
+**blotter-mfe** (serves at `/blotter/`):
+```bash
+docker build -f apps/blotter-mfe/Dockerfile \
+  -t fx-platform-blotter-mfe:local .
+docker run -d --rm --name blotter-test -p 8085:80 fx-platform-blotter-mfe:local
+# check: curl http://localhost:8085/blotter/
+docker stop blotter-test
+```
+
+---
+
 ## Implementation Roadmap
 
 - [x] **Phase 1: Monorepo Scaffolding & Setup**

@@ -89,6 +89,17 @@ A high-performance enterprise FX Trading showcasing a **3-Micro-Frontend (MFE)**
 - [x] Document architecture and setup instructions.
 - [x] Verify full workspace `pnpm build` and local `pnpm preview` execution across all 3 apps.
 - [ ] Finalize CI/CD pipeline and containerized deployment strategy.
+  - [x] Per-app `Dockerfile`s (shell-app, pricing-mfe, blotter-mfe) — multi-stage
+    build using `turbo prune` per app, final stage serves static output via
+    `nginx:alpine`. Each builds and verified independently (see README §4).
+  - [x] Gateway `nginx.conf` (path-based proxy: `/` → shell, `/pricing/` →
+    pricing, `/blotter/` → blotter, WS upgrade → mock-ws-server).
+  - [x] `mock-ws-server` Dockerfile — verified accepting WS connections and
+    streaming ticks.
+  - [x] `docker-compose.yml` wiring all 5 services together — verified
+    end-to-end locally (see README §4): all routes 200, WS upgrade proxies
+    correctly through the gateway to `mock-ws-server`.
+  - [ ] Deploy to a GCP `e2-micro` VM (Always Free tier) with real nginx.
 
 ### Phase 5: Benchmarking, Documentation & Portfolio Readies
 - [ ] Verify 60fps performance without main thread blocking.
